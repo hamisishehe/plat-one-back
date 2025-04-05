@@ -51,12 +51,6 @@ public class RefWithdrawController {
             if (amount <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Amount must be greater than zero");
             }
-            if (transactionId == null || transactionId.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Transaction ID must not be empty");
-            }
-            if (withdrawMethod == null || withdrawMethod.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Withdraw method must not be empty");
-            }
 
             // Proceed with withdrawal processing
             String response = refWithdrawService.createWithdrawal(userId, amount, transactionId, phoneNumber, wallet, withdrawMethod);

@@ -2,16 +2,20 @@ package com.example.platform.Service;
 
 
 
-import com.example.platform.Model.EnaTokenModel;
+import com.example.platform.Model.UsdTokenModel;
 import com.example.platform.Model.InvestmentModel;
 import com.example.platform.Model.ProfitModel;
 import com.example.platform.Model.UserModel;
 import com.example.platform.Repository.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +27,7 @@ public class InvestmentService {
     private UserRepository userRepository;
 
     @Autowired
-    private EnaTokenRepository enaTokenRepository;
+    private USDTokenRepository USDTokenRepository;
 
     @Autowired
     private InvestmentRepository investmentRepository;
@@ -39,35 +43,29 @@ public class InvestmentService {
         UserModel user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        EnaTokenModel enaToken = enaTokenRepository.findByUserId(userId)
+        UsdTokenModel enaToken = USDTokenRepository.findByUserId(userId)
                 .orElse(null);
         if (enaToken == null) {
-            return "ENA token balance not found for user.";
+            return "USD  balance not found for user.";
         }
 
 
         if (enaToken.getAvailableBalance() < amount) {
-            return "Insufficient ENA balance for this investment.";
+            return "Insufficient USD balance for this plan.";
         }
 
-        // Deduct the investment amount from the ENA token balance
-//        enaToken.setAvailableBalance(enaToken.getAvailableBalance() - amount);
+        ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
+        LocalDateTime startDate = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
+        LocalDateTime maturityDate = startDate.plusMinutes(5);
 
-        double currentBalance = enaToken.getAvailableBalance();
-        double amountToDeduct = amount; // Assuming amount is a double
-
-        double newBalance = currentBalance - amountToDeduct;
-
-        enaToken.setAvailableBalance(newBalance);
-        enaTokenRepository.save(enaToken);
 
         // Create a new investment record
         InvestmentModel investment = new InvestmentModel();
         investment.setUser(user);
         investment.setAmount(amount);
         investment.setStatus(InvestmentModel.InvestmentStatus.RUNNING);
-        investment.setStartDate(LocalDate.now());
-        investment.setMaturityDate(LocalDate.now().plusMonths(3)); // Set maturity to 3 months from now
+        investment.setStartDate(startDate);
+        investment.setMaturityDate(maturityDate); // Set maturity to 1 day from now
         investment.setInvestmentPackage(InvestmentModel.InvestmentPackage.valueOf(invest_package)); // Set based on user selection
 
         investmentRepository.save(investment);
@@ -76,36 +74,59 @@ public class InvestmentService {
     }
 
     // Scheduled task to calculate and store daily profit
-    @Scheduled(cron = "0 0 9 * * Mon")
-    public void calculateAndStoreDailyProfit() {
+    @Scheduled(cron = "0 * * * * *") //
+    @Transactional
+    public void calculateAndStoreProfitForMatureInvestments() {
+        System.out.println("Running scheduled investment check...");
 
-        List<InvestmentModel> investments = investmentRepository.findAll(); // Fetch all investments
-        LocalDate today = LocalDate.now();
+        List<InvestmentModel> investments = investmentRepository.findAll();
+
+        ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
+        LocalDateTime now = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
+
 
         for (InvestmentModel investment : investments) {
-            // Check if the investment is mature
-            if (!investment.isMature()) {
-                // Calculate daily profit
-
-                double dailyProfit = investment.calculateDailyProfit();
-
-                ProfitModel profitModel = profitRepository.findByUser(investment.getUser())
-                        .orElseGet(() -> createNewProfitModel(investment.getUser()));
-
-                double updatedTotalProfit = profitModel.getTotalProfit() + dailyProfit;
-
-                profitModel.setTotalProfit(updatedTotalProfit);
-                profitModel.setLastUpdated(today);
-
-                profitModel.setTotalProfit(updatedTotalProfit);
-                profitModel.setLastUpdated(today);
-                profitRepository.save(profitModel);
-
-                handleReferralBonuses(investment.getUser(), dailyProfit);
-
+            System.out.println("Running scheduled investment check 1 ...");
+            if (isInvestmentMature(investment, now)) {
+                System.out.println("Running scheduled investment check 2...");
+                processMatureInvestment(investment, now);
             }
         }
     }
+
+    private boolean isInvestmentMature(InvestmentModel investment, LocalDateTime currentDate) {
+        return (currentDate.isAfter(investment.getMaturityDate()) || currentDate.isEqual(investment.getMaturityDate()))
+                && (investment.getStatus() == null || investment.getStatus() != InvestmentModel.InvestmentStatus.FINISHED);
+    }
+
+    private void processMatureInvestment(InvestmentModel investment, LocalDateTime currentDate) {
+        System.out.println("Processing mature investment ID: " + investment.getId());
+
+        double totalProfit = investment.calculateDailyProfit();
+
+        ProfitModel profitModel = profitRepository.findByUser(investment.getUser()).orElse(null);
+
+        if (profitModel == null || profitModel.getUser() == null) {
+            System.out.println("Creating new profit record...");
+            ProfitModel newProfit = new ProfitModel();
+            newProfit.setUser(investment.getUser());
+            newProfit.setTotalProfit(totalProfit);
+            newProfit.setLastUpdated(LocalDate.from(currentDate));
+            profitRepository.save(newProfit);
+        } else {
+            System.out.println("Updating existing profit record...");
+            profitModel.setTotalProfit(profitModel.getTotalProfit() + totalProfit);
+            profitModel.setLastUpdated(LocalDate.from(currentDate));
+            profitRepository.save(profitModel);
+        }
+
+        investment.setStatus(InvestmentModel.InvestmentStatus.FINISHED);
+        investmentRepository.save(investment);
+        System.out.println("Investment ID " + investment.getId() + " marked as FINISHED.");
+    }
+
+
+
 
     // Method to create a new ProfitModel
     private ProfitModel createNewProfitModel(UserModel user) {

@@ -2,27 +2,24 @@ package com.example.platform.Service;
 
 
 import com.example.platform.Model.BalanceModel;
-import com.example.platform.Model.EnaTokenModel;
+import com.example.platform.Model.UsdTokenModel;
 import com.example.platform.Repository.BalanceRepository;
-import com.example.platform.Repository.EnaTokenRepository;
+import com.example.platform.Repository.USDTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Optional;
 
 @Service
-public class ENATokenService {
+public class USDTokenService {
 
     @Autowired
-    private EnaTokenRepository enaTokenRepository;
+    private USDTokenRepository USDTokenRepository;
 
     @Autowired
     private BalanceRepository balanceRepository;
 
-    // Conversion rate: 1 ENA = 0.0001 USD => 1 USD = 10,000 ENA
-    private static final double ENA_TO_USD_RATE = 0.0001;  // Rate for ENA to USD
+
 
     public String swapUsdToEna(Long userId, double usdAmount) {
 
@@ -40,37 +37,35 @@ public class ENATokenService {
             return "Insufficient balance for this swap.";
         }
 
-        // Calculate the equivalent ENA token amount (1 ENA = 0.0001 USD)
-        double enaAmount = usdAmount / ENA_TO_USD_RATE; // Convert USD to ENA
 
-        // Deduct the USD amount from the user's available balance
+
         balance.setAvailableBalance(balance.getAvailableBalance() - usdAmount);
         balanceRepository.save(balance);
 
         // Fetch or initialize the user's ENA token balance
-        Optional<EnaTokenModel> enaTokenOptional = enaTokenRepository.findByUserId(userId);
-        EnaTokenModel enaToken;
+        Optional<UsdTokenModel> enaTokenOptional = USDTokenRepository.findByUserId(userId);
+        UsdTokenModel enaToken;
 
         if (enaTokenOptional.isPresent()) {
             // Add the converted ENA token amount to the user's existing token balance
             enaToken = enaTokenOptional.get();
-            double updatedBalance = enaToken.getAvailableBalance() + enaAmount;
+            double updatedBalance = enaToken.getAvailableBalance() + usdAmount;
             enaToken.setAvailableBalance(updatedBalance);
         } else {
             // If the user doesn't have an ENA token account, create one
-            enaToken = new EnaTokenModel();
+            enaToken = new UsdTokenModel();
             enaToken.setUser(balance.getUser());
-            enaToken.setAvailableBalance(enaAmount);
+            enaToken.setAvailableBalance(usdAmount);
             enaToken.setLockedBalance(0);  // Initial locked balance
         }
 
         // Save the updated ENA token balance
-        enaTokenRepository.save(enaToken);
+        USDTokenRepository.save(enaToken);
 
-        return "Swap successful: " + usdAmount + " USD converted to " + enaAmount + " ENA tokens.";
+        return "Swap successful: " + usdAmount + " USD converted to " + usdAmount + " ENA tokens.";
     }
 
-    public EnaTokenModel getBalance(Long userId) {
-        return enaTokenRepository.findAllByUserId(userId);
+    public UsdTokenModel getBalance(Long userId) {
+        return USDTokenRepository.findAllByUserId(userId);
     }
 }

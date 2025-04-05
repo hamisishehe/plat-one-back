@@ -23,8 +23,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private EmailService emailService;
+
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -97,15 +96,15 @@ public class UserService implements UserDetailsService {
         // Save the new user
         UserModel savedUser = userRepository.save(user);
 
-        // Send a welcome email
-        emailService.sendSimpleEmail(user.getEmail(), "Welcome to Enatech",
-                "Dear " + user.getUsername() + ",\n\nThank you for registering with Enatech!");
-
-        // Notify referrer if applicable
-        if (user.getReferredBy() != null) {
-            emailService.sendSimpleEmail(user.getReferredBy().getEmail(), "New Referral Alert",
-                    "Dear " + user.getReferredBy().getUsername() + ",\n\n" + user.getUsername() + " has registered using your referral code!");
-        }
+//        // Send a welcome email
+//        emailService.sendSimpleEmail(user.getEmail(), "Welcome to Enatech",
+//                "Dear " + user.getUsername() + ",\n\nThank you for registering with Enatech!");
+//
+//        // Notify referrer if applicable
+//        if (user.getReferredBy() != null) {
+//            emailService.sendSimpleEmail(user.getReferredBy().getEmail(), "New Referral Alert",
+//                    "Dear " + user.getReferredBy().getUsername() + ",\n\n" + user.getUsername() + " has registered using your referral code!");
+//        }
 
         return "Registration Successfully";
     }

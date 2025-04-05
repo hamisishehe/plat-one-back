@@ -7,7 +7,6 @@ import com.example.platform.Model.PasswordResetTokenModel;
 import com.example.platform.Model.UserModel;
 import com.example.platform.Repository.PasswordResetTokenRepository;
 import com.example.platform.Repository.UserRepository;
-import com.example.platform.Service.EmailService;
 import com.example.platform.Service.TokenService;
 import com.example.platform.Service.UserService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -35,8 +34,6 @@ public class UserController {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Autowired
-    private EmailService emailService;
 
     @Autowired
     private UserRepository userRepository;
@@ -163,7 +160,7 @@ public class UserController {
         String resetUrl = "https://enatokens.online/reset-password?token=" + token.getToken();
 
 
-        emailService.sendPasswordResetEmail(email, resetUrl);
+//        emailService.sendPasswordResetEmail(email, resetUrl);
 
         return ResponseEntity.ok("Password reset link sent to your email");
     }

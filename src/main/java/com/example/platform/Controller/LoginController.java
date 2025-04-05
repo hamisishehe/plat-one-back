@@ -2,6 +2,9 @@ package com.example.platform.Controller;
 
 
 
+import com.example.platform.Component.JwtUtils;
+import com.example.platform.Model.UserModel;
+import com.example.platform.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,13 +41,16 @@ public class LoginController {
         String email = HtmlUtils.htmlEscape(loginRequest.get("email").trim());
         String password = HtmlUtils.htmlEscape(loginRequest.get("password").trim());
 
-        // Basic validation
-        if (email.isEmpty() || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid email format."));
-        }
-        if (password.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Password cannot be empty."));
-        }
+        System.out.println(email);
+        System.out.println(password);
+
+//        // Basic validation
+//        if (email.isEmpty() || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid email format."));
+//        }
+//        if (password.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Password cannot be empty."));
+//        }
 
         Optional<UserModel> user = userService.authenticateUser(email, password);
 

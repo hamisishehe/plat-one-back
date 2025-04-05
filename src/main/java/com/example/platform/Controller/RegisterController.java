@@ -1,8 +1,9 @@
 package com.example.platform.Controller;
 
 
-import com.example.investapp.Model.UserModel;
-import com.example.investapp.Service.UserService;
+
+import com.example.platform.Model.UserModel;
+import com.example.platform.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,23 +42,31 @@ public class RegisterController {
         String password = HtmlUtils.htmlEscape(userData.get("password").trim());
 
 
+        System.out.println(username);
+        System.out.println(email);
+        System.out.println(phonenumber);
+        System.out.println(password);
 
-        // Basic validation for each field
-        if (!username.matches("^[a-zA-Z0-9_]{3,20}$")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username format.");
-        }
-        if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email format.");
-        }
-        if (!phonenumber.matches("^[0-9]{10}$")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid phone number format.");
-        }
-        if (password.length() < 6) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password must be at least 6 characters.");
-        }
 
+//        // Basic validation for each field
+//        if (!username.matches("^[a-zA-Z0-9_]{3,20}$")) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username format.");
+//        }
+//        if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email format.");
+//        }
+//        if (!phonenumber.matches("^[0-9]{10}$")) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid phone number format.");
+//        }
+//        if (password.length() < 6) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password must be at least 6 characters.");
+//        }
+
+        System.out.println("not done");
         // Process registration
         String registeredUser = userService.registerUser(username, email, phonenumber, password, referralCode);
+
+        System.out.println("done");
 
 
         return ResponseEntity.ok(registeredUser);

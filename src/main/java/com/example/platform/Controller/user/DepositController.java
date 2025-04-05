@@ -38,12 +38,8 @@ public class DepositController {
 
             Long userId = Long.parseLong(depositRequest.get("userId"));
             double amount = Double.parseDouble(depositRequest.get("amount"));
-            String trans_id = depositRequest.get("trans_id");
-            String gateway = depositRequest.get("gate_away");
             String address =depositRequest.get("address");
-            String phoneNumber =depositRequest.get("phonenumber");
             String username = depositRequest.get("username");
-            System.out.println(amount + trans_id+gateway+address+phoneNumber+username);
 
             // Basic validation checks
             if (userId == null || userId <= 0) {
@@ -51,14 +47,43 @@ public class DepositController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user ID");
             }
             System.out.println("2");
-            if (trans_id.isEmpty()  || username.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("All fields are required");
-            }
 
 
-            String deposit = depositService.makeDeposit(userId, amount, trans_id, gateway, address, phoneNumber, username);
+            String deposit = depositService.makeDeposit(userId, amount,address, username);
 
             return ResponseEntity.ok(deposit);
+
+        } catch (NumberFormatException e) {
+            // Handle cases where userId or amount are not valid numbers
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input format");
+        } catch (Exception e) {
+            // Catch any unexpected exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing your request");
+        }
+    }
+
+    @CrossOrigin(
+            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
+            maxAge = 3600 // Cache the preflight response for 1 hour
+    )
+    @PostMapping("/confirm_deposit")
+    public ResponseEntity<String> confirm_deposit(@RequestBody Map<String, String> formData) {
+        try {
+            // Sanitize and parse inputs
+            Long userId = Long.parseLong(HtmlUtils.htmlEscape(formData.get("userId").trim()));
+            Long depositId = Long.parseLong(HtmlUtils.htmlEscape(formData.get("depositId").trim()));
+
+            // Basic validation checks
+            if (userId <= 0) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user ID");
+            }
+
+            // Proceed with deposit confirmation
+            String confirmedDeposit = depositService.confirm_Deposit(userId,depositId);
+            return ResponseEntity.ok(confirmedDeposit);
 
         } catch (NumberFormatException e) {
             // Handle cases where userId or amount are not valid numbers

@@ -27,18 +27,15 @@ public class DepositService {
     private RefBalanceRepository refBalanceRepository;
 
     // Step 1: Make deposit (Pending) and update locked balance
-    public String makeDeposit(Long userId, double amount, String transId, String gateaway, String address, String phoneNumbber, String username) {
+    public String makeDeposit(Long userId, double amount, String address,String username) {
 
         UserModel user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         DepositModel depositModel = new DepositModel();
         depositModel.setAmount(amount);
-        depositModel.setTransactionId(transId);
-        depositModel.setGateAway(gateaway);
         depositModel.setAddress(address);
         depositModel.setUsername(username);
-        depositModel.setPhoneNumber(phoneNumbber);
-        depositModel.setStatus(DepositModel.Status.CONFIRMED);  // Set status as PENDING
+        depositModel.setStatus(DepositModel.Status.PENDING);  // Set status as PENDING
         depositModel.setUser(user);
         depositRepository.save(depositModel);
 
@@ -89,6 +86,41 @@ public class DepositService {
 
         }
 
+
+        return "Successfully";
+    }
+
+    public String confirm_Deposit(Long userid, Long depositId) {
+
+        UserModel user = userRepository.findById(userid)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        DepositModel depositModel = depositRepository.findById(depositId).orElseThrow(() -> new RuntimeException("Deposit Id Not Found"));
+
+
+        double amount = depositModel.getAmount();
+
+
+        BalanceModel balance = user.getBalance();
+
+        if (balance !=null){
+            balance.setAvailableBalance(balance.getAvailableBalance() + amount);
+            balanceRepository.save(balance);
+
+            depositModel.setStatus(DepositModel.Status.CONFIRMED);
+            depositRepository.save(depositModel);
+        }
+        else{
+            BalanceModel balanceModel = new BalanceModel();
+            balanceModel.setAvailableBalance(amount);
+            balanceModel.setLockedBalance(0.0);
+            balanceModel.setUser(user);
+            balanceRepository.save(balanceModel);
+
+            depositModel.setStatus(DepositModel.Status.CONFIRMED);
+            depositRepository.save(depositModel);
+
+        }
 
         return "Successfully";
     }

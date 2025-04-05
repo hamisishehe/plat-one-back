@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,9 +24,9 @@ public class InvestmentModel {
 
     private double amount;
 
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
-    private LocalDate maturityDate;
+    private LocalDateTime maturityDate;
 
     @Enumerated(EnumType.STRING)
     private InvestmentPackage investmentPackage;
@@ -35,7 +36,7 @@ public class InvestmentModel {
     private InvestmentStatus status;
 
     public enum InvestmentPackage {
-        ENA1, ENA2, ENA3, ENA4, ENA5
+            COMMON
     }
 
     // New enum for status
@@ -49,21 +50,24 @@ public class InvestmentModel {
         double profitRate;
 
         switch (investmentPackage) {
-            case ENA1:
-                profitRate = 0.005;  // 2%
+            case COMMON:
+                profitRate = 0.025;  // 2%
                 break;
-            case ENA2:
-                profitRate = 0.0065; // 2.5%
-                break;
-            case ENA3:
-                profitRate = 0.0075;  // 3%
-                break;
-            case ENA4:
-                profitRate = 0.0085; // 3.5%
-                break;
-            case ENA5:
-                profitRate = 0.01;  // 4%
-                break;
+//            case RARE:
+//                profitRate = 0.0025; // 2.5%
+//                break;
+//            case EPIC:
+//                profitRate = 0.003;  // 3%
+//                break;
+//            case PREMIUM1:
+//                profitRate = 0.003; // 3.5%
+//                break;
+//            case PREMIUM2:
+//                profitRate = 0.003;  // 4%
+//                break;
+//            case PREMIUM3:
+//                profitRate = 0.003; // 3.5%
+//                break;
             default:
                 throw new IllegalArgumentException("Unknown investment package");
         }
@@ -80,6 +84,6 @@ public class InvestmentModel {
 
     // Check if investment is mature
     public boolean isMature() {
-        return LocalDate.now().isAfter(maturityDate);
+        return LocalDateTime.now().isAfter(maturityDate); // Updated to use LocalDateTime
     }
 }

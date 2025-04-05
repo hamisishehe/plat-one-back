@@ -24,16 +24,10 @@ public class DepositModel {
 
     private String username;
 
-    private String transactionId;
-
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private String gateAway;
-
     private String address;
-
-    private String phoneNumber;
 
     @Column(name = "created_at")
     private Date createdAt;

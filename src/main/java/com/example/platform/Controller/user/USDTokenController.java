@@ -2,8 +2,8 @@ package com.example.platform.Controller.user;
 
 
 
-import com.example.platform.Model.EnaTokenModel;
-import com.example.platform.Service.ENATokenService;
+import com.example.platform.Model.UsdTokenModel;
+import com.example.platform.Service.USDTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/ena")
-public class EnaTokenController {
+@RequestMapping("/api/usdt")
+public class USDTokenController {
 
     @Autowired
-    private ENATokenService enaTokenService;
+    private USDTokenService USDTokenService;
 
 
 
@@ -32,7 +32,7 @@ public class EnaTokenController {
         Long userId = Long.valueOf(userForm.get("userId"));
         Double usdAmount = Double.valueOf(userForm.get("usdAmount"));
 
-        String response = enaTokenService.swapUsdToEna(userId, usdAmount);
+        String response = USDTokenService.swapUsdToEna(userId, usdAmount);
         return ResponseEntity.ok(response);
     }
 
@@ -44,9 +44,9 @@ public class EnaTokenController {
             maxAge = 3600 // Cache the preflight response for 1 hour
     )
     @GetMapping("/show-balance/{userId}")
-    public ResponseEntity<EnaTokenModel> getUserDeposits(@PathVariable Long userId) {
+    public ResponseEntity<UsdTokenModel> getUserDeposits(@PathVariable Long userId) {
 
-        EnaTokenModel enaTokenModel = enaTokenService.getBalance(userId);
-        return ResponseEntity.ok(enaTokenModel);
+        UsdTokenModel usdTokenModel = USDTokenService.getBalance(userId);
+        return ResponseEntity.ok(usdTokenModel);
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deposits")
@@ -214,6 +215,22 @@ public class DepositController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(wallet);
+    }
+
+
+
+    @CrossOrigin(
+            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
+            maxAge = 3600 // Cache the preflight response for 1 hour
+    )
+    @GetMapping("/{depositId}")
+    public ResponseEntity<Optional<DepositModel>> getDepositById(@PathVariable Long depositId) {
+        Optional<DepositModel> deposits = depositService.getDepositById(depositId);
+
+        return ResponseEntity.ok(deposits);
     }
 
     // Endpoint to get all wallets for a user based on user ID

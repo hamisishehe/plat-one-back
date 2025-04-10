@@ -18,4 +18,5 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     Boolean existsByReferralCode(String referralCode);
     List<UserModel> findAllByOrderByIdDesc();
 
+    Optional<UserModel> findByUsername(String username);
 }

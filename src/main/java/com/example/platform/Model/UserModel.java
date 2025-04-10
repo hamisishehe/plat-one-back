@@ -56,6 +56,7 @@ public class UserModel implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<DepositModel> depositModel;
 
 

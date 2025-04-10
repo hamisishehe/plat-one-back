@@ -126,12 +126,43 @@ public class DepositService {
     }
 
     public String changestatus(Long depositId) {
+
+        DepositModel depositModel = depositRepository.findById(depositId).orElseThrow(() -> new RuntimeException("Deposit Id Not Found"));
+
+
+        UserModel user = depositModel.getUser();
+
+        double amount = depositModel.getAmount();
+
+
+        BalanceModel balance = user.getBalance();
+
+        if (balance !=null){
+            balance.setAvailableBalance(balance.getAvailableBalance() + amount);
+            balanceRepository.save(balance);
+
+            depositModel.setStatus(DepositModel.Status.CONFIRMED);
+            depositRepository.save(depositModel);
+        }
+        else{
+            BalanceModel balanceModel = new BalanceModel();
+            balanceModel.setAvailableBalance(amount);
+            balanceModel.setLockedBalance(0.0);
+            balanceModel.setUser(user);
+            balanceRepository.save(balanceModel);
+
+            depositModel.setStatus(DepositModel.Status.CONFIRMED);
+            depositRepository.save(depositModel);
+
+        }
+
         // Fetch deposit by ID
-        DepositModel depositModel = depositRepository.findById(depositId)
+        DepositModel depositModel2 = depositRepository.findById(depositId)
                 .orElseThrow(() -> new RuntimeException("Deposit not found"));
-         depositModel.setStatus(DepositModel.Status.CONFIRMED);
-         depositRepository.save(depositModel);
+         depositModel2.setStatus(DepositModel.Status.CONFIRMED);
+         depositRepository.save(depositModel2);
         return "Deposit Confirmed";
+
     }
 
     public String deleteDeposit(Long depositId) {
@@ -196,6 +227,13 @@ public class DepositService {
     public List<DepositModel> getUserDeposits(Long userId) {
         return depositRepository.findAllByUserIdOrderByIdDesc(userId);
     }
+
+
+    public Optional<DepositModel> getDepositById(Long depositId) {
+        return depositRepository.findById(depositId);
+    }
+
+
 
     public List<DepositModel> getalluserdeposit(){
         return depositRepository.findAllByOrderByIdDesc();

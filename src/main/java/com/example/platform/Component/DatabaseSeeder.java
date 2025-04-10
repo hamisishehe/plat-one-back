@@ -32,7 +32,15 @@ public class DatabaseSeeder {
         user1.setReferredBy(null); // No referrer
         userRepository.save(user1);
 
-
+        UserModel user2 = new UserModel();
+        user2.setUsername("hamisi");
+        user2.setEmail("hamisishehe@gmail.com");
+        user2.setPassword(new BCryptPasswordEncoder().encode("Hamisi2233."));
+        user2.setRole(UserModel.Role.USER);
+        user2.setPhoneNumber("0744982380"); // Sample phone number
+        user2.setReferralCode("adminReferral"); // Sample referral code
+        user2.setReferredBy(null); // No referrer
+        userRepository.save(user2);
 
         // Add more users as needed
         System.out.println("Database seeded with initial data.");

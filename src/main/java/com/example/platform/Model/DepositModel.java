@@ -49,8 +49,9 @@ public class DepositModel {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JsonBackReference
     private UserModel user;
+
 
 
     public enum Status {

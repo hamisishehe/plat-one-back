@@ -16,8 +16,6 @@ public class ProfitController {
 
     @Autowired
     private ProfitService profitService;
-
-
     @CrossOrigin(
             origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones

@@ -24,11 +24,12 @@ public class DepositController {
     private DepositService depositService;
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/make")
     public ResponseEntity<String> makeDeposit(@RequestBody Map<String, String> depositRequest) {
@@ -63,11 +64,12 @@ public class DepositController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/confirm_deposit")
     public ResponseEntity<String> confirm_deposit(@RequestBody Map<String, String> formData) {
@@ -97,11 +99,12 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/confirm")
     public ResponseEntity<String> confirmDeposit(@RequestBody Map<String, String> formData) {
@@ -144,11 +147,12 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/delete")
     public ResponseEntity<String>deleteDeposit(@RequestBody Map<String, String> FormData) {
@@ -159,11 +163,12 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<DepositModel>> getUserDeposits(@PathVariable Long userId) {
@@ -172,11 +177,12 @@ public class DepositController {
         return ResponseEntity.ok(depositModels);
     }
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/users-deposits")
     public ResponseEntity<List<DepositModel>> getalluserdepo() {
@@ -186,11 +192,12 @@ public class DepositController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/getallpending")
     public ResponseEntity<List<DepositModel>> getall() {
@@ -201,11 +208,12 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/wallet/{depositId}")
     public ResponseEntity<WalletModel> getWalletByDeposit(@PathVariable Long depositId) {
@@ -219,11 +227,12 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/{depositId}")
     public ResponseEntity<Optional<DepositModel>> getDepositById(@PathVariable Long depositId) {
@@ -234,11 +243,12 @@ public class DepositController {
 
     // Endpoint to get all wallets for a user based on user ID
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/user/wallets/{userId}")
     public ResponseEntity<List<WalletModel>> getWalletsByUser(@PathVariable Long userId) {

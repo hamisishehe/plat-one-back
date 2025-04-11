@@ -21,11 +21,12 @@ public class InvestmentController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/invest")
     public ResponseEntity<String> invest(@RequestBody Map<String, String> investmentData) {
@@ -62,11 +63,12 @@ public class InvestmentController {
 
     // Optionally, you can add a method to get all investments of a user
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/{userId}")
     public ResponseEntity<List<InvestmentModel>> getUserInvestments(@PathVariable Long userId) {
@@ -75,11 +77,12 @@ public class InvestmentController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/users-investments")
     public ResponseEntity<List<Object[]>> getinvestments() {
@@ -87,11 +90,12 @@ public class InvestmentController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/user/{invest_id}")
     public ResponseEntity<InvestmentModel> getinvestmentsbyid(@PathVariable Long invest_id) {
@@ -99,11 +103,12 @@ public class InvestmentController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
-            maxAge = 3600 // Cache the preflight response for 1 hour
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
     )
     @DeleteMapping("/delete/{invest_id}")
     public ResponseEntity<String>  deleteinvestment(@PathVariable Long invest_id) {

@@ -17,7 +17,7 @@ public class ProfitController {
     @Autowired
     private ProfitService profitService;
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)

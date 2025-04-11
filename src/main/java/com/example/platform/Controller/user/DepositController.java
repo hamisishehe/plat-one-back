@@ -23,9 +23,8 @@ public class DepositController {
     @Autowired
     private DepositService depositService;
 
-
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -64,7 +63,7 @@ public class DepositController {
     }
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -98,7 +97,7 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -131,7 +130,7 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -145,7 +144,7 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -160,7 +159,7 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -173,7 +172,7 @@ public class DepositController {
         return ResponseEntity.ok(depositModels);
     }
     @CrossOrigin(
-            origins = {"http://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -187,7 +186,7 @@ public class DepositController {
     }
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -202,7 +201,7 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -220,7 +219,7 @@ public class DepositController {
 
 
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
@@ -235,7 +234,7 @@ public class DepositController {
 
     // Endpoint to get all wallets for a user based on user ID
     @CrossOrigin(
-            origins = {"https://enatokens.online", "https://enatokens-admin.netlify.app"}, // Specify exact origins
+            origins = {"https://cryptowealthsolutionscws.com/auth/login", "https://cwsadmin.netlify.app/login"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
             allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)

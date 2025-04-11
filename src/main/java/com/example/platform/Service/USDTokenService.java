@@ -62,7 +62,7 @@ public class USDTokenService {
         // Save the updated ENA token balance
         USDTokenRepository.save(enaToken);
 
-        return "Swap successful: " + usdAmount + " USD converted to " + usdAmount + " ENA tokens.";
+        return  "Successful "+ usdAmount + "Sent to Work Account";
     }
 
     public UsdTokenModel getBalance(Long userId) {

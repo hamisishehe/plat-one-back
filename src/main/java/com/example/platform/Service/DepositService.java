@@ -5,6 +5,7 @@ import com.example.platform.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -143,6 +144,8 @@ public class DepositService {
 
             depositModel.setStatus(DepositModel.Status.CONFIRMED);
             depositRepository.save(depositModel);
+
+            handleReferralBonuses(user, amount);
         }
         else{
             BalanceModel balanceModel = new BalanceModel();
@@ -153,7 +156,7 @@ public class DepositService {
 
             depositModel.setStatus(DepositModel.Status.CONFIRMED);
             depositRepository.save(depositModel);
-
+            handleReferralBonuses(user, amount);
         }
 
         // Fetch deposit by ID
@@ -177,24 +180,34 @@ public class DepositService {
         return "Deposit deleted successfully";
     }
 
+    public String rejectAmount(Long depositId){
+
+        DepositModel depositModel = depositRepository.findById(depositId).orElseThrow(() -> new RuntimeException("Deposit Id Not Found"));
+
+        DepositModel depositModel1 = new DepositModel();
+        depositModel1.setStatus(DepositModel.Status.REJECTED);
+        depositRepository.save(depositModel1);
+
+        return "Deposit  successfully rejected";
+    }
 
     private void handleReferralBonuses(UserModel user, double depositAmount) {
         // Level 1 referral bonus (5%)
         if (user.getReferredBy() != null) {
-            double level1Bonus = depositAmount * 0.05; // 5%
+            double level1Bonus = depositAmount * 0.10; // 5%
             addBonusToUser(user.getReferredBy(), level1Bonus);
         }
 
         // Level 2 referral bonus (3%)
         if (user.getReferredBy() != null && user.getReferredBy().getReferredBy() != null) {
-            double level2Bonus = depositAmount * 0.03; // 3%
+            double level2Bonus = depositAmount * 0.05; // 3%
             addBonusToUser(user.getReferredBy().getReferredBy(), level2Bonus);
         }
 
         // Level 3 referral bonus (1%)
         if (user.getReferredBy() != null && user.getReferredBy().getReferredBy() != null
                 && user.getReferredBy().getReferredBy().getReferredBy() != null) {
-            double level3Bonus = depositAmount * 0.01; // 1%
+            double level3Bonus = depositAmount * 0.02; // 1%
             addBonusToUser(user.getReferredBy().getReferredBy().getReferredBy(), level3Bonus);
         }
     }
@@ -239,11 +252,23 @@ public class DepositService {
         return depositRepository.findAllByOrderByIdDesc();
     }
 
-
     public List<DepositModel> getAllPendingDeposits() {
-        return depositRepository.findAllByStatus(DepositModel.Status.PENDING);
+        return depositRepository.findByStatus(DepositModel.Status.PENDING);
     }
 
+    public List<DepositModel> getAllConfirmedAndRejectedDeposits() {
+        return depositRepository.findByStatusIn(Arrays.asList(DepositModel.Status.CONFIRMED, DepositModel.Status.REJECTED));
+    }
+
+    public List<DepositModel> getAllConfirmedDeposits() {
+        return depositRepository.findByStatus(DepositModel.Status.CONFIRMED);
+    }
+
+
+
+    public List<DepositModel> getAllRejectedDeposits() {
+        return depositRepository.findByStatus(DepositModel.Status.REJECTED);
+    }
     public WalletModel getWalletByDeposit(Long depositId) {
         return depositRepository.findWalletByDepositId(depositId);
     }

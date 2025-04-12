@@ -27,4 +27,9 @@ public interface DepositRepository extends JpaRepository<DepositModel, Long> {
     List<WalletModel> findWalletsByUserId(@Param("userId") Long userId);
 
     List<DepositModel>findAllByOrderByIdDesc();
+
+    List<DepositModel> findByStatus(DepositModel.Status status);
+
+    List<DepositModel> findByStatusIn(List<DepositModel.Status> statuses);
+
 }

@@ -140,10 +140,12 @@ public class DepositController {
             maxAge = 3600 // Cache the preflight response for 1 hour
     )
     @PutMapping("/change_status/{depositId}")
-    public ResponseEntity<String> rejectDeposit(@PathVariable Long depositId) {
-        String rejectDeposits = depositService.changestatus(depositId);
-        return ResponseEntity.ok(rejectDeposits);
+    public ResponseEntity<String> ChangeStatus(@PathVariable Long depositId) {
+        String change_status = depositService.changestatus(depositId);
+        return ResponseEntity.ok(change_status);
     }
+
+
 
 
     @CrossOrigin(
@@ -190,6 +192,38 @@ public class DepositController {
         List<DepositModel> depositModels = depositService.getalluserdeposit();
         return ResponseEntity.ok(depositModels);
     }
+
+    @CrossOrigin(
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
+    )
+    @GetMapping("/users-pending-deposits")
+    public ResponseEntity<List<DepositModel>> getAllPending() {
+
+        List<DepositModel> depositModels = depositService.getAllPendingDeposits();
+        return ResponseEntity.ok(depositModels);
+    }
+
+    @CrossOrigin(
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
+    )
+    @GetMapping("/users-all-deposits")
+    public ResponseEntity<List<DepositModel>> getAllCandR() {
+
+        List<DepositModel> depositModels = depositService.getAllConfirmedAndRejectedDeposits();
+        return ResponseEntity.ok(depositModels);
+    }
+
+
 
     @CrossOrigin(
             origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins

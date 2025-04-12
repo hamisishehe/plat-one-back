@@ -56,7 +56,7 @@ public class InvestmentService {
 
         ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
         LocalDateTime startDate = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
-        LocalDateTime maturityDate = startDate.plusMinutes(5);
+        LocalDateTime maturityDate = startDate.plusDays(1);
 
 
         // Create a new investment record

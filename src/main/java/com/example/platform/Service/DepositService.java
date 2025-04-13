@@ -126,6 +126,18 @@ public class DepositService {
         return "Successfully";
     }
 
+
+    public String rejectDeposit(Long depositId){
+
+        DepositModel depositModel = depositRepository.findById(depositId).orElseThrow(() -> new RuntimeException("Deposit Id Not Found"));
+
+         depositModel.setStatus(DepositModel.Status.REJECTED);
+         depositRepository.save(depositModel);
+
+         return "rejected";
+
+    }
+
     public String changestatus(Long depositId) {
 
         DepositModel depositModel = depositRepository.findById(depositId).orElseThrow(() -> new RuntimeException("Deposit Id Not Found"));

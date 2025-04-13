@@ -156,11 +156,10 @@ public class DepositController {
             maxAge = 3600
             // Keep this only if you need credentials (cookies, authentication)
     )
-    @PostMapping("/delete")
-    public ResponseEntity<String>deleteDeposit(@RequestBody Map<String, String> FormData) {
-        Long depositId = Long.valueOf(FormData.get("depositId"));
-          String deletedepo= depositService.deleteDeposit(depositId);
-        return ResponseEntity.ok(deletedepo);
+    @PutMapping("/reject/{depositId}")
+    public ResponseEntity<String>deleteDeposit(@PathVariable Long depositId) {
+          String reject= depositService.rejectDeposit(depositId);
+        return ResponseEntity.ok(reject);
     }
 
 

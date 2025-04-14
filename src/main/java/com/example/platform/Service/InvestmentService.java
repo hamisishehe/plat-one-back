@@ -61,11 +61,11 @@ public class InvestmentService {
         LocalDateTime maturityDate = startDate.plusDays(1);
 
 
-        boolean isinvestavailable = investmentRepository.findAllByUserAndStatus(user, InvestmentModel.InvestmentStatus.RUNNING);
-
-        if (isinvestavailable){
-            return "already Exist";
+        if (investmentRepository.existsByUserAndStatus(user, InvestmentModel.InvestmentStatus.RUNNING)) {
+            return "An active investment already exists.";
         }
+
+
         else {
         // Create a new investment record
         InvestmentModel investment = new InvestmentModel();

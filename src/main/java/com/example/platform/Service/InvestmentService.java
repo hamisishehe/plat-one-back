@@ -54,11 +54,19 @@ public class InvestmentService {
             return "Insufficient USD balance for this plan.";
         }
 
+
+
         ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
         LocalDateTime startDate = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
         LocalDateTime maturityDate = startDate.plusDays(1);
 
 
+        boolean isinvestavailable = investmentRepository.findAllByUserAndStatus(user, InvestmentModel.InvestmentStatus.RUNNING);
+
+        if (isinvestavailable){
+            return "already Exist";
+        }
+        else {
         // Create a new investment record
         InvestmentModel investment = new InvestmentModel();
         investment.setUser(user);
@@ -71,6 +79,7 @@ public class InvestmentService {
         investmentRepository.save(investment);
 
         return "Successfully";
+        }
     }
 
     // Scheduled task to calculate and store daily profit
@@ -144,8 +153,14 @@ public class InvestmentService {
     }
 
     public List<Object[]> getallplans() {
-        return investmentRepository.findAllInvestmentsWithUserData(); // This method needs to be defined in InvestmentRepository
+        return investmentRepository.findAllFinishedInvestmentsWithUserData(); // This method needs to be defined in InvestmentRepository
     }
+
+
+    public List<Object[]> getallpendingplans() {
+        return investmentRepository.findAllRunningInvestmentsWithUserData(); // This method needs to be defined in InvestmentRepository
+    }
+
 
     public InvestmentModel getbyinvestmentid(Long investment_id) {
         return investmentRepository.findById(investment_id)

@@ -89,6 +89,20 @@ public class InvestmentController {
         return  ResponseEntity.ok(investmentService.getallplans());
     }
 
+
+    @CrossOrigin(
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
+    )
+    @GetMapping("/users-pending-investments")
+    public ResponseEntity<List<Object[]>> getpending() {
+        return  ResponseEntity.ok(investmentService.getallpendingplans());
+    }
+
     @CrossOrigin(
             origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones

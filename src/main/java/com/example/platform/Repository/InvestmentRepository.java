@@ -18,4 +18,14 @@ public interface InvestmentRepository extends JpaRepository<InvestmentModel, Lon
     @Query("SELECT i, u FROM InvestmentModel i JOIN i.user u")
     List<Object[]> findAllInvestmentsWithUserData();
 
+
+    @Query("SELECT i, u FROM InvestmentModel i JOIN i.user u WHERE i.status = 'RUNNING'")
+    List<Object[]> findAllRunningInvestmentsWithUserData();
+
+    @Query("SELECT i, u FROM InvestmentModel i JOIN i.user u WHERE i.status = 'FINISHED'")
+    List<Object[]> findAllFinishedInvestmentsWithUserData();
+
+
+    Boolean findAllByUserAndStatus(UserModel user, InvestmentModel.InvestmentStatus status);
+
 }

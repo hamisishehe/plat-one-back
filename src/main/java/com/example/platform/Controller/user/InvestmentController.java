@@ -124,7 +124,7 @@ public class InvestmentController {
             maxAge = 3600
             // Keep this only if you need credentials (cookies, authentication)
     )
-    @DeleteMapping("/delete/{invest_id}")
+    @GetMapping("/delete/{invest_id}")
     public ResponseEntity<String>  deleteinvestment(@PathVariable Long invest_id) {
          String delete = investmentService.deleteplan(invest_id);
          return  ResponseEntity.ok(delete);

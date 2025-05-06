@@ -126,7 +126,7 @@ public class InvestmentController {
     )
     @DeleteMapping("/delete/{invest_id}")
     public ResponseEntity<String>  deleteinvestment(@PathVariable Long invest_id) {
-        investmentService.deleteplan(invest_id);
-        return new ResponseEntity<>("Investment deleted successfully", HttpStatus.OK);
+         String delete = investmentService.deleteplan(invest_id);
+         return  ResponseEntity.ok(delete);
     }
 }

@@ -167,12 +167,13 @@ public class InvestmentService {
                 .orElseThrow(() -> new RuntimeException("investment not found"));
     }
 
-    public void deleteplan(Long planid){
+    public String deleteplan(Long planid){
         Optional<InvestmentModel> investment = investmentRepository.findById(planid);
         if (investment.isPresent()) {
             investmentRepository.deleteById(planid);
+            return "deleted";
         } else {
-            new RuntimeException("not found");
+           return "not found";
         }
     }
 

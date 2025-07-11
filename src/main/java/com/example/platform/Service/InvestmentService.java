@@ -83,7 +83,7 @@ public class InvestmentService {
     }
 
     // Scheduled task to calculate and store daily profit
-    @Scheduled(cron = "0 * * * * *") //
+
     @Transactional
     public void calculateAndStoreProfitForMatureInvestments() {
         System.out.println("Running scheduled investment check...");

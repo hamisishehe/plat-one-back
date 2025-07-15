@@ -3,19 +3,24 @@ package com.example.platform.Controller.user;
 
 import com.example.platform.Model.ProductModel;
 import com.example.platform.Model.TaskModel;
+import com.example.platform.Model.TaskProductModel;
+import com.example.platform.Service.TaskProductService;
 import com.example.platform.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api")
 public class TaskController {
 
 
     @Autowired
-    private TaskService taskService;
+    private TaskProductService taskProductService;
 
     @CrossOrigin(
             origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
@@ -25,16 +30,60 @@ public class TaskController {
             maxAge = 3600
             // Keep this only if you need credentials (cookies, authentication)
     )
-    @GetMapping("/products/{userId}")
-    public List<ProductModel> getAvailableProducts(@PathVariable Long userId) {
-        System.out.println(userId);
-        return taskService.getAvailableProducts(userId);
+    @PostMapping("/doTask")
+    public ResponseEntity<String> doTask(@RequestBody Map<String, String> TasksDetails) {
+        Long userId = Long.parseLong(TasksDetails.get("userId"));
+        int amount = Integer.parseInt(TasksDetails.get("amount"));
+
+        System.out.println(amount);
+        String task = taskProductService.DoTask(userId, amount);
+        return ResponseEntity.ok(task);
     }
 
-//    @PostMapping("/complete/{userId}/{productId}")
-//    public TaskModel completeTask(@PathVariable Long userId, @PathVariable Long productId) {
-//        return "";
-//    }
+
+
+
+    @CrossOrigin(
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
+    )
+    @GetMapping("/get-tasks/{userId}")
+    public ResponseEntity<Optional<TaskProductModel>> GetTasks(@PathVariable Long userId) {
+
+        System.out.println(userId);
+
+        Optional<TaskProductModel> tasks = taskProductService.GetTask(userId);
+
+        return ResponseEntity.ok(tasks);
+    }
+
+
+
+    @CrossOrigin(
+            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true",
+            maxAge = 3600
+            // Keep this only if you need credentials (cookies, authentication)
+    )
+    @GetMapping("/check-tasks/{userId}")
+    public ResponseEntity<Boolean> checkTask(@PathVariable Long userId) {
+
+        System.out.println(userId);
+
+        Boolean tasks = taskProductService.hasExpiredTask(userId);
+
+        System.out.println(tasks);
+
+        return ResponseEntity.ok(tasks);
+    }
+
+
 
 
 }

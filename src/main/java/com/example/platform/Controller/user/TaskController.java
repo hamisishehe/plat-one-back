@@ -23,12 +23,11 @@ public class TaskController {
     private TaskProductService taskProductService;
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/doTask")
     public ResponseEntity<String> doTask(@RequestBody Map<String, String> TasksDetails) {
@@ -44,12 +43,11 @@ public class TaskController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/get-tasks/{userId}")
     public ResponseEntity<Optional<TaskProductModel>> GetTasks(@PathVariable Long userId) {
@@ -64,12 +62,11 @@ public class TaskController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/check-tasks/{userId}")
     public ResponseEntity<Boolean> checkTask(@PathVariable Long userId) {
@@ -80,6 +77,21 @@ public class TaskController {
 
         System.out.println(tasks);
 
+        return ResponseEntity.ok(tasks);
+    }
+
+
+
+    @CrossOrigin(
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
+            allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
+            maxAge = 3600
+    )
+    @GetMapping("/get-tasks")
+    public ResponseEntity<List<TaskProductModel>> getAllTask() {
+        List<TaskProductModel> tasks = taskProductService.GetAllTask();
         return ResponseEntity.ok(tasks);
     }
 

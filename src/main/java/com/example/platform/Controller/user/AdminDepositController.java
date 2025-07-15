@@ -19,12 +19,11 @@ public class AdminDepositController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/getall")
     public ResponseEntity<List<AdminDeposit>> getall() {

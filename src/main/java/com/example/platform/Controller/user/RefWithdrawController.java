@@ -27,12 +27,11 @@ public class RefWithdrawController {
 // Other necessary imports
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/create")
     public ResponseEntity<String> withdraw(@RequestBody Map<String, String> formData) {
@@ -67,12 +66,11 @@ public class RefWithdrawController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<RefWithdrawModel>> getWithdrawalsByUserId(@PathVariable Long userId) {
@@ -82,12 +80,11 @@ public class RefWithdrawController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/users-withdraw/show-all")
     public ResponseEntity<List<RefWithdrawModel>> getallwithdraw() {
@@ -96,12 +93,11 @@ public class RefWithdrawController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/confirm")
     public ResponseEntity<String> getallwithdraw(@RequestBody Map<String, String> FormData) {
@@ -111,12 +107,11 @@ public class RefWithdrawController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/all-with-user")
     public ResponseEntity<List<Map<String, Object>>> getAllRefWithdrawalsWithUser() {
@@ -150,12 +145,11 @@ public class RefWithdrawController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/getallpending")
     public ResponseEntity<List<RefWithdrawModel>> getall() {

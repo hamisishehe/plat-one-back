@@ -45,12 +45,11 @@ public class UserController {
     private JwtUtils jwtUtils;
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/profile")
     public ResponseEntity<UserModel> getUserProfile(@RequestHeader("Authorization") String token) {
@@ -67,12 +66,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/referrals/{userId}")
     public ResponseEntity<List<List<UserModel>>> getAllReferrals(@PathVariable Long userId) {
@@ -90,12 +88,11 @@ public class UserController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/userbyid/{userId}")
     public ResponseEntity<UserModel> getuserby(@PathVariable Long userId) {
@@ -104,12 +101,11 @@ public class UserController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @GetMapping("/users")
     public ResponseEntity<List<UserModel>> users(){
@@ -118,12 +114,11 @@ public class UserController {
     }
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @PostMapping("/lock")
     public ResponseEntity<String> lockAccount(@RequestBody Map<String, String> Formdata) {
@@ -134,12 +129,11 @@ public class UserController {
 
 
     @CrossOrigin(
-            origins = {"https://cryptowealthsolutionscws.com", "https://cwsadmin.netlify.app"}, // Specify exact origins
+            origins = {"https://novanest-ecommerce.com", "https://novanestecommerce.netlify.app"}, // Specify exact origins
             allowedHeaders = {"Content-Type", "Authorization", "X-Requested-With"}, // Limit headers to necessary ones
             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT}, // Allow only required methods
-            allowCredentials = "true",
+            allowCredentials = "true", // Keep this only if you need credentials (cookies, authentication)
             maxAge = 3600
-            // Keep this only if you need credentials (cookies, authentication)
     )
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable Long id) {

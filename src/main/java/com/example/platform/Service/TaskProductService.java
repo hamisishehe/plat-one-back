@@ -36,7 +36,7 @@ public class TaskProductService {
         System.out.println(amount + "......................");
         ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
         LocalDateTime now = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
-        LocalDateTime maturityDate = now.plusMinutes(5);
+        LocalDateTime maturityDate = now.plusMinutes(10);
 
         UserModel userModel = userRepository.findById(user_id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -131,24 +131,9 @@ public class TaskProductService {
         return Optional.empty();
     }
 
-    public String CheckTask(Long user_id) {
-        UserModel userModel = userRepository.findById(user_id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
-        LocalDateTime now = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
-
-        List<TaskProductModel> expiredTasks = taskProductRepository.findExpiredTasksByUser(userModel, now);
-
-        if (expiredTasks.isEmpty()) {
-            return "is expire";
-        }
-
-        return "no expired task";
+    public List<TaskProductModel> GetAllTask(){
+        return taskProductRepository.findAll();
     }
-
-
-
 
     public boolean hasExpiredTask(Long user_id) {
         UserModel userModel = userRepository.findById(user_id)

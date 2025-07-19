@@ -36,7 +36,7 @@ public class TaskProductService {
         System.out.println(amount + "......................");
         ZoneId eastAfricaZone = ZoneId.of("Africa/Nairobi");
         LocalDateTime now = ZonedDateTime.now(eastAfricaZone).toLocalDateTime();
-        LocalDateTime maturityDate = now.plusMinutes(10);
+        LocalDateTime maturityDate = now.plusDays(1);
 
         UserModel userModel = userRepository.findById(user_id)
                 .orElseThrow(() -> new RuntimeException("User not found"));

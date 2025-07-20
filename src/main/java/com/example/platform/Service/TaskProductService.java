@@ -99,10 +99,10 @@ public class TaskProductService {
 
     private double getRate(int totalAmount) {
         if (totalAmount >= 10 && totalAmount <= 100) return 0.02;
-        if (totalAmount <= 200) return 0.025;
-        if (totalAmount <= 500) return 0.03;
-        if (totalAmount <= 1000) return 0.035;
-        if (totalAmount <= 2000) return 0.04;
+        if (totalAmount >=101 && totalAmount<= 200) return 0.025;
+        if (totalAmount >=201 && totalAmount<= 500) return 0.03;
+        if (totalAmount >=501 && totalAmount<= 1000) return 0.035;
+        if (totalAmount >=1001 && totalAmount<= 2000) return 0.04;
         return 0;
     }
 
